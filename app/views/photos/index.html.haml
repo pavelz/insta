@@ -1,0 +1,18 @@
+Insta
+
+
+= react_component("HelloWorld", {greeting: 'hello from rails'})
+
+
+- @photos.each do |p|
+  %br
+
+  - p.locations.each do |l|
+    = link_to "https://www.google.com/maps?q=#{l.lat},#{l.lng}" do
+      location
+      = l.lat
+      ,
+      = l.lng
+      %br
+
+  = image_tag p.image[:medium].url
