@@ -1,14 +1,27 @@
 import React from "react"
 import PropTypes from "prop-types"
 import {Provider} from "react-redux"
-import {createStore, applyMiddleware} from "redux"
+import {combineReducers, createStore} from "redux"
 
-let store = createStore(() => [], {}, applyMiddleware)
+
+function hey(state = [], action){
+  console.log("reducer")
+  switch(action.type){
+    case "YES":
+      console.log("reducer YES")
+      return [{faux_wizard: "yes"}]
+  }
+  return state
+}
+
+const reducer = combineReducers({ hey })
+const store = createStore(reducer)
 
 class HelloWorld extends React.Component {
 
   constructor(props) {
     super(props)
+
     this.state = {
       initial: "react component: "
     }
@@ -16,6 +29,9 @@ class HelloWorld extends React.Component {
 
   handleClick = () => {
     console.log("CLICK")
+    console.log(store.getState())
+    store.dispatch({type: "YES", text: "hello"})
+    console.log(store.getState())
   }
 
 
