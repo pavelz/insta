@@ -2,6 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import {Provider} from "react-redux"
 import {combineReducers, createStore} from "redux"
+import Photo from "./Photo"
 
 
 function hey(state = [], action){
@@ -40,6 +41,7 @@ class HelloWorld extends React.Component {
       <Provider store={store}>
         Greeting: {this.state.initial + this.props.greeting}
         <button onClick={this.handleClick} className="btn btn-primary">delete greeting</button>
+        <Photo msg="Glorious"/>
       </Provider>
     );
   }
