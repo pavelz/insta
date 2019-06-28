@@ -3,7 +3,7 @@ class CreateLocations < ActiveRecord::Migration[5.2]
     create_table :locations do |t|
       t.decimal :lat, {precision: 10, scale: 6}
       t.decimal :lng, {precision: 10, scale: 6}
-      t.string :photo_id
+      t.integer :photo_id
 
       t.timestamps
     end
