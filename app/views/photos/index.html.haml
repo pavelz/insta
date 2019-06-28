@@ -9,10 +9,7 @@ Insta
 
   - p.locations.each do |l|
     = link_to "https://www.google.com/maps?q=#{l.lat},#{l.lng}" do
-      location
-      = l.lat
-      ,
-      = l.lng
+      = l.address.blank? ? "#{l.lat}, #{l.lng}" : l.address 
       %br
 
   = image_tag p.image[:medium].url

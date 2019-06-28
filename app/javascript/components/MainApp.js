@@ -1,8 +1,12 @@
 import React from "react"
 import PropTypes from "prop-types"
+import PhotoData from "./PhotoData"
 import Photo from "./Photo"
 import About from "./About"
 import {BrowserRouter as Router, Route, Link} from "react-router-dom"
+import {createStore} from "redux"
+
+const store = createStore(Photo)
 
 class MainApp extends React.Component {
   render(){
@@ -18,10 +22,11 @@ class MainApp extends React.Component {
           <Route path="/about" component={About}/>
           <Route path="/new" component={Photo}/>
         </Router>
-      </React.Fragment>
+     </React.Fragment>
     );
   }
 }
+
 
 function Home (props) {
   return(

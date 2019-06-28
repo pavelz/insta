@@ -16,7 +16,7 @@ function hey(state = [], action){
 }
 
 const reducer = combineReducers({ hey })
-const store = createStore(reducer)
+const storage = createStore(reducer)
 
 class HelloWorld extends React.Component {
 
@@ -30,15 +30,15 @@ class HelloWorld extends React.Component {
 
   handleClick = () => {
     console.log("CLICK")
-    console.log(store.getState())
-    store.dispatch({type: "YES", text: "hello"})
-    console.log(store.getState())
+    console.log(storage.getState())
+    storage.dispatch({type: "YES", text: "hello"})
+    console.log(storage.getState())
   }
 
 
   render () {
     return (
-      <Provider store={store}>
+      <Provider storage={storage}>
         Greeting: {this.state.initial + this.props.greeting}
         <button onClick={this.handleClick} className="btn btn-primary">delete greeting</button>
         <Photo msg="Glorious"/>
