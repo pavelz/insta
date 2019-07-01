@@ -6,5 +6,5 @@ end
 
 class Video < ApplicationRecord
   has_many :locations
-  include ImageUploader::Attachment.new(:video)
+  include VideoUploader::Attachment.new(:video)
 end
