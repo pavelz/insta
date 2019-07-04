@@ -13,13 +13,14 @@ export const receivePhotos = (photos) => {
 }
 
 export const requestPhotos = (user) => {
-  return { 
+  return {
     type: REQUEST_PHOTOS,
     user
   }
 }
 
 export const fetchPhotos = (user) => {
+  console.log("hloo")
   return dispatch => {
       fetch("/photos.json")
         .then(response => response.json())

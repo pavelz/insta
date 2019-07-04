@@ -1,15 +1,25 @@
 import React from "react"
 import PropTypes from "prop-types"
-import PhotoActions from "./PhotoActions"
+import {fetchPhotos} from "./PhotoActions"
 import PhotoReducer from "./PhotoReducer"
 import Photo from "./Photo"
 import About from "./About"
 import {BrowserRouter as Router, Route, Link} from "react-router-dom"
-import {createStore} from "redux"
+import {createStore, applyMiddleWare} from "redux"
 
-const store = createStore(Photo)
+import thunkMiddleware from 'redux-thunk'
+import { createLogger } from 'redux-logger'
+
+const loggerMiddleware = createLogger({})
+
+const store = createStore(Photo, {}, applyMiddleWare(thunkMiddleware, loggerMiddleware))
 
 class MainApp extends React.Component {
+  componentDidMount() {
+    console.log("mounted!")
+    fetchPhotos(1)
+  }
+
   render(){
     return(
       <React.Fragment>

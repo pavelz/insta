@@ -5,6 +5,7 @@ import {
 } from './PhotoActions'
 
 // Reducers for reading store / Photo model
+
 const reducer = (state, action) => {
   switch (action.type) {
     case REQUEST_PHOTOS:

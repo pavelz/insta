@@ -12,15 +12,18 @@ RSpec.describe PhotosController, type: :controller do
   end
 
   it 'should allow photo uploads' do
-    photo = Hash.new
-    photo['name'] = 'image.jpg'
-    photo['image'] = @file
-    location = Hash.new
-    location['lat'] = '11.111'
-    location['lng'] = '22.222'
+    expect{
+      photo = Hash.new
+      photo['name'] = 'image.jpg'
+      photo['image'] = @file
 
-    post :create, params: {photo: photo, location: location}
-    response.should be_success
+      location = Hash.new
+      location['lat'] = '11.111'
+      location['lng'] = '22.222'
+
+      post :create, params: {photo: photo, location: location}
+      #response.should be_success
+    }.to change(Photo, :count).by(1)
   end
 end
 
