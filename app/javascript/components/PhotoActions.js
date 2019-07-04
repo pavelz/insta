@@ -5,21 +5,21 @@ export const RECEIVE_PHOTOS = 'RECEIVE_PHOTOS'
 export const REQEUST_PHOTOS = 'REQEUST_PHOTOS'
 //export const 
 
-const receivePhotos = (photos) => {
+export const receivePhotos = (photos) => {
   return {
-    type: RECEIVE_PHOTOS
+    type: RECEIVE_PHOTOS,
     photos
   }
 }
 
-const requestPhotos = (user) => {
+export const requestPhotos = (user) => {
   return { 
     type: REQUEST_PHOTOS,
     user
   }
 }
 
-const fetchPhotos = (user) => {
+export const fetchPhotos = (user) => {
   return dispatch => {
       fetch("/photos.json")
         .then(response => response.json())
@@ -27,4 +27,3 @@ const fetchPhotos = (user) => {
   }
 }
 
-export default photos

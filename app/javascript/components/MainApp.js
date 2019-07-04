@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import PhotoActions from "./PhotoActions"
-import PhotoReducer from "./PhotoReduce"
+import PhotoReducer from "./PhotoReducer"
 import Photo from "./Photo"
 import About from "./About"
 import {BrowserRouter as Router, Route, Link} from "react-router-dom"

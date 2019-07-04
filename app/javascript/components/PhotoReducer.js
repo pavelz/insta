@@ -1,6 +1,6 @@
 import {
-  FETCH_PHOTOS
-  RECEIVE_PHOTOS
+  FETCH_PHOTOS,
+  RECEIVE_PHOTOS,
   REQUEST_PHOTOS
 } from './PhotoActions'
 
