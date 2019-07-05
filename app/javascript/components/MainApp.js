@@ -24,7 +24,7 @@ class MainApp extends React.Component {
     return(
       <React.Fragment>
         <Router>
-          <h1>MainApp Component</h1>
+          <h1>el MainApp Component</h1>
           <Link to="/">Home</Link>
           <Link to="/about">About</Link>
           <Link to="/new">Post</Link>
