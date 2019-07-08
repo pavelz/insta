@@ -6,7 +6,7 @@ import {
 
 // Reducers for reading store / Photo model
 
-const reducer = (state, action) => {
+const reducer = (state = {}, action) => {
   switch (action.type) {
     case REQUEST_PHOTOS:
       return Object.assign({}, state, {
@@ -15,7 +15,7 @@ const reducer = (state, action) => {
     case RECEIVE_PHOTOS:
       return Object.assign({}, state, {
         isLoading: false,
-        photo
+        photos: action.photos
       })
   }
 }
