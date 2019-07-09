@@ -3,7 +3,9 @@ import {createStore} from 'redux'
 export const FETCH_PHOTOS = 'FETCH_PHOTOS'
 export const RECEIVE_PHOTOS = 'RECEIVE_PHOTOS'
 export const REQEUST_PHOTOS = 'REQEUST_PHOTOS'
-//export const 
+export const ADD_PHOTO = 'ADD_PHOTO'
+export const DELETE_PHOTO = 'DELETE_PHOTO'
+
 
 export const receivePhotos = (photos) => {
   return {
@@ -20,7 +22,6 @@ export const requestPhotos = (user) => {
 }
 
 export const fetchPhotos = (user) => {
-  console.log('fetchPhotos')
   return dispatch => {
       console.log('called fetch dispatch')
       fetch("/photos.json")
@@ -29,3 +30,8 @@ export const fetchPhotos = (user) => {
   }
 }
 
+export const fetchPhotosIfNeeded = () => {
+  return (dispatch, getState) => {
+    photos = getState()
+  }
+}

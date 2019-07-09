@@ -30,8 +30,6 @@ class MainApp extends React.Component {
                     <Route exact path="/" component={Home}/>
                     <Route path="/about" component={About}/>
                     <Route path="/new" component={Photo}/>
-
-
                 </Router>
             </React.Fragment>
         );
@@ -48,8 +46,23 @@ function Home (props) {
 }
 
 MainApp.propTypes = {
-  message: PropTypes.string,
+  message: PropTypes.array,
   dispatch: PropTypes.func.isRequired
 }
 
-export default connect()(MainApp)
+const mapStateToProps = ( state, ownProps ) => {
+    return {
+        message: state != null ? state.photos : null
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    console.log('mapDispatch')
+    return {
+        delete: () =>  dispatch({type: 'DELETE_PHOTO'}),
+        add: () => dispatch({type: 'ADD_PHOTO'}),
+        dispatch: (param) => dispatch(param)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainApp)
