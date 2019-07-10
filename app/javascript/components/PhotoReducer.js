@@ -22,7 +22,7 @@ const reducer = (state = {}, action) => {
       })
     case ADD_PHOTO:
       return Object.assign({}, state, {
-        added: action.photos
+        photos: state.photos != null ? state.photos.concat([action.photo]) : [action.photo]
       })
     default:
       return state
