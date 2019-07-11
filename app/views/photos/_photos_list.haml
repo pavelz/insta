@@ -1,0 +1,10 @@
+- @photos.each do |p|
+  .p-3
+    - p.locations.each do |l|
+      .p-1
+        = link_to "https://www.google.com/maps?q=#{l.lat},#{l.lng}" do
+          = l.address.blank? ? "#{l.lat}, #{l.lng}" : l.address
+        = link_to "Around", photos_url(around: "#{l.lat},#{l.lng}"), class: 'btn btn-secondary', title: "Other photos around the location"
+        %br
+
+    = image_tag p.image[:medium].url
