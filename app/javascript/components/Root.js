@@ -8,7 +8,7 @@ import thunkMiddleware from 'redux-thunk'
 import { createLogger } from 'redux-logger'
 
 const loggerMiddleware = createLogger()
-const store = createStore(PhotoReducer, null, applyMiddleware(thunkMiddleware, loggerMiddleware))
+const store = createStore(PhotoReducer, {photos: []}, applyMiddleware(thunkMiddleware, loggerMiddleware))
 
 export default class Root extends Component {
     render() {

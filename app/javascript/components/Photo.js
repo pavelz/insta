@@ -1,12 +1,19 @@
 import React from "react"
-import PropTypes from "prop-types"
-import {Provider} from "react-redux"
-import {combineReducers, createStore} from "redux"
 
 class Photo extends React.Component {
     render() {
+        let {photos} = this.props
+        console.log("Photos")
+        console.log(photos)
         return (
-            <React.Fragment><b>Photo</b> - hello</React.Fragment>
+            <React.Fragment>
+                <b>Photo</b> - hello
+                {photos.map(photo =>(
+                        <img key={photo.id} href={photo.url}/>
+                    )
+                )}
+                <b>EOL</b>
+            </React.Fragment>
         )
     }
 }

@@ -12,13 +12,15 @@ import {BrowserRouter as Router, Route, Link} from "react-router-dom"
 class MainApp extends React.Component {
   constructor(props){
     super(props)
+      console.log(props)
   }
 
   componentDidMount() {
-    this.props.dispatch(fetchPhotos(1))
+    const {dispatch} = this.props
+    dispatch(fetchPhotos(1))
   }
-
-    render(){
+   render(){
+        const {photos} = this.props
         return(
             <React.Fragment>
                 <Router>
@@ -31,6 +33,7 @@ class MainApp extends React.Component {
                     <Route path="/about" component={About}/>
                     <Route path="/new" component={Photo}/>
                 </Router>
+                <Photo photos={photos}/>
             </React.Fragment>
         );
   }
@@ -46,13 +49,15 @@ function Home (props) {
 }
 
 MainApp.propTypes = {
-  message: PropTypes.array,
+  photos: PropTypes.array.isRequired,
+  message: PropTypes.string,
   dispatch: PropTypes.func.isRequired
 }
 
-const mapStateToProps = ( state, ownProps ) => {
+function mapStateToProps ( state ) {
+    const { photos } = state
     return {
-        message: state != null ? state.photos : null
+        photos
     }
 }
 
@@ -65,4 +70,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainApp)
+export default connect(mapStateToProps)(MainApp)

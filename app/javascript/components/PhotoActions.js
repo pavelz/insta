@@ -23,7 +23,6 @@ export const requestPhotos = (user) => {
 
 export const fetchPhotos = (user) => {
   return dispatch => {
-      console.log('called fetch dispatch')
       fetch("/photos.json")
         .then(response => response.json())
         .then(json => dispatch(receivePhotos(json)))
