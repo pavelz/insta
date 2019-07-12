@@ -20,6 +20,7 @@ class MainApp extends React.Component {
     dispatch(fetchPhotos(1))
   }
    render(){
+      console.log("RENDER!")
         const {photos} = this.props
         return(
             <React.Fragment>

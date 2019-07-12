@@ -8,8 +8,13 @@ class Photo extends React.Component {
         return (
             <React.Fragment>
                 <b>Photo</b> - hello
+                <br/>
                 {photos.map(photo =>(
-                        <img key={photo.id} href={photo.url}/>
+                        <React.Fragment key={photo.id}>
+                            <b>{photo.name}</b><br/>
+                            <img src={photo.url}/>
+                            <br/>
+                        </React.Fragment>
                     )
                 )}
                 <b>EOL</b>

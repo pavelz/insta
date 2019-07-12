@@ -4,12 +4,11 @@ class PhotosController < ApplicationController
   def index
     if params[:around].present?
       (lat, lng) = params[:around].match(/([\d.]+),([\d.]+)/).captures
-
-
       @photos = Photo.joins(:locations).where("trunc(locations.lat,4) = trunc(?,4) and trunc(locations.lng,4) = trunc(?,4)",lat.to_f, lng.to_f)
     else
       @photos = Photo.all
     end
+
     respond_to do |f|
       f.html
       f.json { render json: @photos.map{|p| {url: p.image[:medium].url, name: p.name, id: p.id}} }
@@ -17,7 +16,6 @@ class PhotosController < ApplicationController
   end
 
   def create
-
     @photo = Photo.new(photo_params)
     @photo.save
 
