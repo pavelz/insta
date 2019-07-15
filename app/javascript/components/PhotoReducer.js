@@ -24,6 +24,7 @@ const reducer = (state = {}, action) => {
         photos: state.photos != null ? state.photos.concat([action.photo]) : [action.photo]
       })
     case DELETE_PHOTO:
+      console.log("DELETE REDUCE")
       return Object.assign({},state, {
         photos: state.photos.filter(photo => photo.id != action.photo.id)
       })

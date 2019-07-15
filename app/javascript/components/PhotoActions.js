@@ -1,5 +1,5 @@
 import fetch from "cross-fetch"
-import {createStore} from 'redux'
+
 export const FETCH_PHOTOS = 'FETCH_PHOTOS'
 export const RECEIVE_PHOTOS = 'RECEIVE_PHOTOS'
 export const REQEUST_PHOTOS = 'REQEUST_PHOTOS'
@@ -28,7 +28,23 @@ export const fetchPhotos = (user) => {
         .then(json => dispatch(receivePhotos(json)))
   }
 }
+export const deleteLocalPhoto = (photo) =>{
+  return {
+    type: DELETE_PHOTO,
+    photo
+  }
+}
 
+export const deletePhoto = (photo) => {
+  return dispatch => {
+    fetch("/photos/" + photo.id, {method: "DELETE"})
+        .then(response => response)
+        .then(json => dispatch(deleteLocalPhoto(photo)))
+  }
+}
+export const addPhoto = (photo) => {
+  // something about photo upload , visual component. etc.
+}
 export const fetchPhotosIfNeeded = () => {
   return (dispatch, getState) => {
     photos = getState()

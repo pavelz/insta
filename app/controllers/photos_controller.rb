@@ -15,6 +15,11 @@ class PhotosController < ApplicationController
     end
   end
 
+  def destroy
+    @photo = Photo.find(params[:id])
+    render json: { ok: 'destroy' }
+  end
+
   def create
     @photo = Photo.new(photo_params)
     @photo.save

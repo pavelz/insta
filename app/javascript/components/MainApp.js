@@ -4,7 +4,8 @@ import {fetchPhotos} from "./PhotoActions"
 import PhotoReducer from "./PhotoReducer"
 
 import {connect} from  'react-redux'
-import Photo from "./Photo"
+import Photos from "./Photos"
+import UploadVideo from "./UploadVideo"
 import About from "./About"
 import {BrowserRouter as Router, Route, Link} from "react-router-dom"
 
@@ -29,12 +30,17 @@ class MainApp extends React.Component {
                     <Link to="/">Home</Link>
                     <Link to="/about">About</Link>
                     <Link to="/new">Post</Link>
+                    <Link to="/upload">Upload</Link>
 
                     <Route exact path="/" component={Home}/>
                     <Route path="/about" component={About}/>
-                    <Route path="/new" component={Photo}/>
+                    <Route path="/new" component={Photos}/>
+                    <Route path="/upload" component={UploadVideo}/>
                 </Router>
-                <Photo photos={photos}/>
+                <div>
+                   <Photos/>
+                </div>
+
             </React.Fragment>
         );
   }
@@ -71,4 +77,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps)(MainApp)
+export default connect(mapStateToProps, mapDispatchToProps)(MainApp)

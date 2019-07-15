@@ -8,6 +8,7 @@
     "bootstrap": "^4.3.1",
     "cross-fetch": "^3.0.4",
     "jquery": "^3.4.1",
+    "npx": "^10.2.0",
     "popper.js": "^1.15.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
@@ -21,6 +22,19 @@
     "stimulus": "^1.1.1"
   },
   "devDependencies": {
+    "babel-jest": "^24.8.0",
+    "babel-preset-es2015": "^6.24.1",
+    "jest": "^24.8.0",
     "webpack-dev-server": "^3.7.1"
+  },
+  "scripts": {
+    "test": "jest",
+    "test-watch": "jest --watch"
+  },
+  "jest": {
+    "roots": [
+      "test/javascript"
+    ]
   }
+
 }

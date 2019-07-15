@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import {Provider} from "react-redux"
 import {combineReducers, createStore} from "redux"
-import Photo from "./Photo"
+import Photos from "./Photos"
 
 
 function hey(state = [], action){
