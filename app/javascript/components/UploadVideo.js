@@ -1,5 +1,6 @@
 import React from 'react'
 
+
 class UploadVideo extends React.Component {
     triggerUpload(e, item){
         console.log(e.target.files)
@@ -16,8 +17,20 @@ class UploadVideo extends React.Component {
                 "X-CSRF-Token": e.target.form['authenticity_token'].value
             }
         })
-            .then(response => response.json(), error => console.log("An error occured", error))
-            .then(json => console.log("Successfuly uploaded"))
+            .then(response => {
+                if (response.ok) {
+                    return response.json()
+                } else {
+                    let error = response.status
+                    console.log("An error occured: ", error)
+                    return null
+                  }
+                }, error => console.log("rejected promise error: ", error))
+            .then(json => {
+                if( json != null ) {
+                    console.log("Successfuly uploaded")
+                }
+             })
     }
     render(){
         console.log("render!")

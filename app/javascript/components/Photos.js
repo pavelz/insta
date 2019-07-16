@@ -48,4 +48,5 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         dispatch: e => dispatch(e)
     }
 }
+
 export default connect(mapSateToProps, mapDispatchToProps)(Photos)

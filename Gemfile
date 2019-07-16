@@ -47,6 +47,7 @@ gem 'jquery-rails' # needed for bootstap ...
 # pictures
 gem 'font-awesome-rails'
 
+gem  'devise'
 
 # Haml
 gem 'haml'
