@@ -1,4 +1,5 @@
 class VideosController < ApplicationController
+
   def index
     @videos = Video.all
     render json: {videos: @videos}
@@ -12,6 +13,6 @@ class VideosController < ApplicationController
 
   private
   def video_params
-    require(:video).premit!
+    params.require(:video).permit!
   end
 end
