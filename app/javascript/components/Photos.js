@@ -23,9 +23,16 @@ class Photos extends React.Component {
                 {photos.map(photo =>(
                         <React.Fragment key={photo.id}>
                             <b>{photo.name}</b><br/>
-                            <img onClick={e => {this.deletePhoto(photo)}} src={photo.url}/>
-                            <br/>
+                            {(() => {
+                                switch(photo.class) {
+                                    case 'Photo':
+                                        return <img onClick={e => { this.deletePhoto(photo) }} src={photo.url}/>
+                                    case 'Video':
+                                        return <embed src={photo.url}/>
+                                }
+                            })()}
                         </React.Fragment>
+
                     )
                 )}
                 <b>EOL</b>

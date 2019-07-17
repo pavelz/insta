@@ -9,9 +9,14 @@ class PhotosController < ApplicationController
       @photos = Photo.all
     end
 
+    photos = current_user.photos
+    videos = current_user.videos
+
+    @feed = [photos, videos].flatten(1).sort_by{|a| a.created_at}.reverse()[0..5]
+
     respond_to do |f|
       f.html
-      f.json { render json: @photos.map{|p| {url: p.image[:medium].url, name: p.name, id: p.id}} }
+      f.json { render json: @feed.map{|p| {url: p.class == Photo ? p.image[:medium].url : p.video.url, class: p.class.name, name: p.name, id: p.id}} }
     end
   end
 
