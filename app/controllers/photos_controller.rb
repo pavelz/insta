@@ -1,5 +1,5 @@
 class PhotosController < ApplicationController
-  skip_before_action :verify_authenticity_token
+  skip_before_action :verify_authenticity_token, only: [:create]
 
   def index
     if params[:around].present?
@@ -9,8 +9,8 @@ class PhotosController < ApplicationController
       @photos = Photo.all
     end
 
-    photos = current_user.photos
-    videos = current_user.videos
+    photos = current_user.photos.limit(10) rescue []
+    videos = current_user.videos.limit(10) rescue []
 
     @feed = [photos, videos].flatten(1).sort_by{|a| a.created_at}.reverse()[0..5]
 
@@ -26,17 +26,16 @@ class PhotosController < ApplicationController
   end
 
   def create
-
     @photo = Photo.new(photo_params)
     @photo.user = current_user
-    @photo.save
+    @photo.save!
 
     @location = Location.new(location_params)
     @location.photo_id = @photo.id
-    @location.save
+    @location.save!
 
     @photo.location_id = @location.id
-    @photo.save
+    @photo.save!
 
     HardWorker.perform_async(@location.id)
 

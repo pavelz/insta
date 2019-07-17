@@ -6,13 +6,18 @@ RSpec.describe PhotosController, type: :controller do
   end
 
   it 'show photos' do
-    photo = Photo.create
+    user = User.create(email: "hello@hello.com", password:"asassasadddasd")
+    sign_in(user)
+    photo = Photo.create(user: user)
     get :index
-    expect(assigns(:photos)).to eq([photo])
+    expect(assigns(:photos).to_a).to eq([photo])
   end
 
   it 'should allow photo uploads' do
+
     expect{
+      user = User.create(email: "hello@hello.com", password:"asassasadddasd")
+      sign_in(user)
       photo = Hash.new
       photo['name'] = 'image.jpg'
       photo['image'] = @file
@@ -22,7 +27,7 @@ RSpec.describe PhotosController, type: :controller do
       location['lng'] = '22.222'
 
       post :create, params: {photo: photo, location: location}
-      #response.should be_success
+      response.should be_success
     }.to change(Photo, :count).by(1)
   end
 end

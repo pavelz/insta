@@ -31,6 +31,7 @@ class Photos extends React.Component {
                                         return <embed src={photo.url}/>
                                 }
                             })()}
+                            <br/>
                         </React.Fragment>
 
                     )
