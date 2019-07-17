@@ -21,7 +21,9 @@ class PhotosController < ApplicationController
   end
 
   def create
+
     @photo = Photo.new(photo_params)
+    @photo.user = current_user
     @photo.save
 
     @location = Location.new(location_params)

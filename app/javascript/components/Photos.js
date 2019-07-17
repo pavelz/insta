@@ -8,7 +8,7 @@ class Photos extends React.Component {
         console.log(e.dispatch)
     }
     deletePhoto(photo){
-        console.log("deleT")
+        oonsole.log("deleT")
         this.props.remove(photo)
 
     }

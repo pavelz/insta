@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_16_095210) do
+ActiveRecord::Schema.define(version: 2019_07_17_103350) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,19 @@ ActiveRecord::Schema.define(version: 2019_07_16_095210) do
     t.text "image_data"
     t.string "address"
     t.integer "location_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.string "media_bits_type"
+    t.bigint "media_bits_id"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["media_bits_type", "media_bits_id"], name: "index_users_on_media_bits_type_and_media_bits_id"
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   create_table "videos", force: :cascade do |t|
