@@ -3,11 +3,14 @@
   "private": true,
   "dependencies": {
     "@babel/preset-react": "^7.0.0",
+    "@material-ui/core": "^4.2.1",
+    "@material-ui/styles": "^4.2.1",
     "@rails/webpacker": "^4.0.7",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "bootstrap": "^4.3.1",
     "cross-fetch": "^3.0.4",
     "jquery": "^3.4.1",
+    "material-ui": "^1.0.0-beta.47",
     "npx": "^10.2.0",
     "popper.js": "^1.15.0",
     "prop-types": "^15.7.2",
@@ -16,6 +19,7 @@
     "react-dom": "^16.8.6",
     "react-redux": "^7.1.0",
     "react-router-dom": "^5.0.1",
+    "react-test-renderer": "^16.8.6",
     "react_ujs": "^2.5.0",
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
@@ -34,7 +38,8 @@
   },
   "jest": {
     "roots": [
-      "test/javascript"
+      "test/javascript",
+      "spec/javascript"
     ]
   }
 }

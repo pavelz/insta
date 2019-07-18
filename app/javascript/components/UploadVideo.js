@@ -1,4 +1,15 @@
 import React from 'react'
+import { styled } from '@material-ui/core/styles'
+import Button from '@material-ui/core/Button'
+
+const MyButton = styled({
+        button: {
+            margin: '2px',
+        },
+        input: {
+            display: 'none',
+        },
+})
 
 
 class UploadVideo extends React.Component {
@@ -42,7 +53,17 @@ class UploadVideo extends React.Component {
                     <input type="hidden" name="authenticity_token" value={token} readOnly={true} />
 
                      FILE:<br/>
-                     <input key="one" id="upload" type="file" onChange={this.triggerUpload.bind(this)}/>
+                    <input
+                        key="one" id="upload" type="file" onChange={this.triggerUpload.bind(this)}
+                        accept="image/*"
+                        id="contained-button-file"
+                        multiple
+                    />
+                    <label htmlFor="contained-button-file">
+                        <Button variant="contained" component="span">
+                            Upload!
+                        </Button>
+                    </label>
                 </form>
             </React.Fragment>
         )
