@@ -60,7 +60,7 @@ class UploadVideo extends React.Component {
                         multiple
                     />
                     <label htmlFor="contained-button-file">
-                        <Button variant="contained" component="span">
+                        <Button color="primary" variant="contained" component="span">
                             Upload!
                         </Button>
                     </label>

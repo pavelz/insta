@@ -7,6 +7,7 @@ class VideosController < ApplicationController
 
   def create
     @video = Video.new(video_params)
+    @video.user = current_user
     if @video.save
       render json: {video_id: @video.id}
     else
