@@ -2,8 +2,6 @@ import React, {useState} from 'react'
 
 
 export default function Button({name = 'Untitles', type='file',title="...",change = {}}) {
-    //const [name, setName ] = useState("Untitled")
-    //const [type, setType ] = useState("button")
 
     let button = ""
     switch(type){

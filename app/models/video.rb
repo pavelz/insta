@@ -10,6 +10,7 @@ class Video < ApplicationRecord
       errors[:video] << "This file is not a video"
     end
   end
+
   has_many :locations
   belongs_to :user
   include VideoUploader::Attachment.new(:video)
