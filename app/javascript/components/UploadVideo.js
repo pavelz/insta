@@ -1,18 +1,12 @@
 import React from 'react'
-import { styled } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button'
-
-const MyButton = styled({
-        button: {
-            margin: '2px',
-        },
-        input: {
-            display: 'none',
-        },
-})
+import Button from './Button'
 
 
 class UploadVideo extends React.Component {
+    constructor(props){
+        super(props)
+        this.state = { status: (<React.Fragment>&nbsp;</React.Fragment>) }
+    }
     triggerUpload(e, item){
         console.log(e.target.files)
         console.log(e.target.form['authenticity_token'])
@@ -30,8 +24,11 @@ class UploadVideo extends React.Component {
         })
             .then(response => {
                 if (response.ok) {
+                    this.setState({status: (<div className="text-success">Uploaded successfully</div>)})
                     return response.json()
                 } else {
+                    console.log(this.state)
+                    this.setState({status: (<div className="text-danger">Error uploading.</div>)})
                     let error = response.status
                     console.log("An error occured: ", error)
                     return null
@@ -42,6 +39,7 @@ class UploadVideo extends React.Component {
                     console.log("Successfuly uploaded")
                 }
              })
+        // trigger redux reload?
     }
     render(){
         console.log("render!")
@@ -51,19 +49,10 @@ class UploadVideo extends React.Component {
             <React.Fragment>
                 <form action="/videos" method="post">
                     <input type="hidden" name="authenticity_token" value={token} readOnly={true} />
-
-                     FILE:<br/>
-                    <input
-                        key="one" id="upload" type="file" onChange={this.triggerUpload.bind(this)}
-                        accept="image/*"
-                        id="contained-button-file"
-                        multiple
-                    />
-                    <label htmlFor="contained-button-file">
-                        <Button color="primary" variant="contained" component="span">
-                            Upload!
-                        </Button>
-                    </label>
+                    <Button name="Upload!" type="file" title="Choose your file ..." change={this.triggerUpload.bind(this)}>
+                        Upload!
+                    </Button>
+                    {this.state.status}
                 </form>
             </React.Fragment>
         )
