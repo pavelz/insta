@@ -18,7 +18,8 @@ export default function Button({name = 'Untitles', type='file',title="...",chang
         case 'submit':
             button = (<input type="submit" class="btn btn-primary" name={name}/>)
             break;
-
+        default:
+            button = (<div className="text-danger">Unknown button type</div>)
     }
     return (
        button
