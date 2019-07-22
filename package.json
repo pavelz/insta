@@ -33,12 +33,20 @@
   },
   "scripts": {
     "test": "jest",
-    "test-watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "jest": {
+    "setupFiles": [
+      "./test/javascript/jestSetup.js"
+    ],
     "roots": [
-      "test/javascript",
       "spec/javascript"
+    ],
+    "moduleDirectories":[
+      "node_modules",
+      "app/javascript/components"
     ]
+
   }
 }
