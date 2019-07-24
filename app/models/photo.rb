@@ -1,9 +1,20 @@
 require "image_processing/mini_magick"
 
 class ImageUploader < Shrine
+  include ImageProcessing::MiniMagick
+  plugin :determine_mime_type
   plugin :processing
   plugin :versions
   plugin :pretty_location
+  plugin :delete_promoted
+  plugin :delete_raw
+  plugin :recache
+  plugin :store_dimensions
+  plugin :validation_helpers
+
+  Attacher.validate do
+    validate_mime_type_inclusion ['image/jpeg', 'image/png']
+  end
 
   process(:store) do |io, context|
     versions = { original: io }

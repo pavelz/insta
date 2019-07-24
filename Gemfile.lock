@@ -108,6 +108,7 @@ GEM
       railties (>= 3.0.0)
     faraday (0.15.4)
       multipart-post (>= 1.2, < 3)
+    fastimage (2.1.5)
     ffi (1.11.1)
     font-awesome-rails (4.7.0.5)
       railties (>= 3.2, < 6.1)
@@ -307,6 +308,7 @@ DEPENDENCIES
   devise
   factory_girl_rails
   faraday
+  fastimage
   font-awesome-rails
   haml
   image_processing

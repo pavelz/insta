@@ -49,6 +49,7 @@ gem 'font-awesome-rails'
 
 gem  'devise'
 
+gem 'fastimage'
 # Haml
 gem 'haml'
 
