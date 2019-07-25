@@ -49,6 +49,8 @@ gem 'font-awesome-rails'
 
 gem  'devise'
 
+gem 'simple_token_authentication', '~> 1.0'
+
 gem 'fastimage'
 # Haml
 gem 'haml'

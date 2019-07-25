@@ -1,6 +1,6 @@
 import React from 'react'
 import Button from './Button'
-
+import {uploadVideo} from './VideoActions'
 
 class UploadVideo extends React.Component {
     constructor(props){
@@ -8,38 +8,9 @@ class UploadVideo extends React.Component {
         this.state = { status: (<React.Fragment>&nbsp;</React.Fragment>) }
     }
     triggerUpload(e, item){
-        console.log(e.target.files)
-        console.log(e.target.form['authenticity_token'])
-        let file = e.target.files[0]
-        let form = new FormData()
-        form.append("video[video]", file)
-        form.append("video[name]", file.name)
 
-        fetch("/videos", {
-            method: 'POST',
-            body: form,
-            headers: {
-                "X-CSRF-Token": e.target.form['authenticity_token'].value
-            }
-        })
-            .then(response => {
-                if (response.ok) {
-                    this.setState({status: (<div className="text-success">Uploaded successfully</div>)})
-                    return response.json()
-                } else {
-                    console.log(this.state)
-                    this.setState({status: (<div className="text-danger">Error uploading.</div>)})
-                    let error = response.status
-                    console.log("An error occured: ", error)
-                    return null
-                  }
-                }, error => console.log("rejected promise error: ", error))
-            .then(json => {
-                if( json != null ) {
-                    console.log("Successfuly uploaded")
-                }
-             })
-        // trigger redux reload?
+        let file = e.target.files[0]
+        uploadVideo(file, e.target.form['authenticity_token'].value)
     }
     render(){
         console.log("render!")

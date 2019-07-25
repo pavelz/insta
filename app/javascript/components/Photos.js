@@ -1,6 +1,5 @@
 import React from "react"
 import {addPhoto,deletePhoto} from "./PhotoActions";
-import {store} from './Root'
 import { connect } from 'react-redux'
 
 class Photos extends React.Component {
