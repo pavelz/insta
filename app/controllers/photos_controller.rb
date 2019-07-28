@@ -1,6 +1,7 @@
 class PhotosController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:create]
 
+
   def index
     if params[:around].present?
       (lat, lng) = params[:around].match(/([\d.]+),([\d.]+)/).captures
@@ -9,8 +10,8 @@ class PhotosController < ApplicationController
       @photos = Photo.all
     end
 
-    photos = current_user.photos.limit(10) rescue []
-    videos = current_user.videos.limit(10) rescue []
+    photos = current_user.photos.limit(10) rescue Photo.where(user: nil)
+    videos = current_user.videos.limit(10) rescue Video.where(user: nil)
 
     @feed = [photos, videos].flatten(1).sort_by{|a| a.created_at}.reverse()[0..5]
 
@@ -27,7 +28,7 @@ class PhotosController < ApplicationController
 
   def create
     @photo = Photo.new(photo_params)
-    @photo.user = current_user
+    @photo.user = current_user if current_user.present?
     @photo.save!
 
     @location = Location.new(location_params)

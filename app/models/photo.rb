@@ -32,6 +32,6 @@ end
 
 class Photo < ApplicationRecord
   has_many :locations
-  belongs_to :user
+  belongs_to :user, optional: true
   include ImageUploader::Attachment.new(:image)
 end

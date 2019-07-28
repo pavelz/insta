@@ -18,6 +18,7 @@ class VideosController < ApplicationController
   private
 
   def video_params
+    @videos = Video.all
     params.require(:video).permit!
   end
 end

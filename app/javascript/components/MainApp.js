@@ -9,6 +9,8 @@ import UploadVideo from "./UploadVideo"
 import About from "./About"
 import {BrowserRouter as Router, Route, Link} from "react-router-dom"
 
+import { Grid, Row, Col } from 'react-flexbox-grid';
+
 
 class MainApp extends React.Component {
   constructor(props){
@@ -27,10 +29,22 @@ class MainApp extends React.Component {
             <React.Fragment>
                 <Router>
                     <h1>MainApp Component</h1>
-                    <Link to="/">Home</Link>
-                    <Link to="/about">About</Link>
-                    <Link to="/new">Post</Link>
-                    <Link to="/upload">Upload</Link>
+                    <Grid fluid>
+                        <Row className="center-xs">
+                            <Col xs={1} md={1}>
+                                <Link className="btn btn-secondary" to="/">Home</Link>
+                            </Col>
+                            <Col xs={1} md={1}>
+                                <Link className="btn btn-secondary" to="/about">About</Link>
+                            </Col>
+                            <Col xs={1} md={1}>
+                                <Link className="btn btn-secondary" to="/new">Post</Link>
+                            </Col>
+                            <Col xs={1} md={1}>
+                                <Link className="btn btn-secondary" to="/upload">Upload</Link>
+                            </Col>
+                        </Row>
+                    </Grid>
 
                     <Route exact path="/" component={Home}/>
                     <Route path="/about" component={About}/>

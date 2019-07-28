@@ -8,6 +8,7 @@
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "bootstrap": "^4.3.1",
     "cross-fetch": "^3.0.4",
+    "flexboxgrid": "^6.3.1",
     "jquery": "^3.4.1",
     "material-ui": "^1.0.0-beta.47",
     "npx": "^10.2.0",
@@ -16,6 +17,7 @@
     "react": "^16.8.6",
     "react-bulma-components": "^2.3.0",
     "react-dom": "^16.8.6",
+    "react-flexbox-grid": "^2.1.2",
     "react-redux": "^7.1.0",
     "react-router-dom": "^5.0.1",
     "react-test-renderer": "^16.8.6",
@@ -43,10 +45,9 @@
     "roots": [
       "spec/javascript"
     ],
-    "moduleDirectories":[
+    "moduleDirectories": [
       "node_modules",
       "app/javascript/components"
     ]
-
   }
 }

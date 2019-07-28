@@ -10,5 +10,4 @@ export default cost reducer = (state = {}, action) => {
 
             })
     }
-
 }
