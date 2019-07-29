@@ -2,7 +2,21 @@ import React from "react"
 import {addPhoto,deletePhoto} from "./PhotoActions";
 import { connect } from 'react-redux'
 
+import Pagination from "react-js-pagination";
+
 class Photos extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            activePage: 1
+        }
+    }
+    handlePageChange(pageNumber) {
+        console.log(`active page is ${pageNumber}`);
+        this.setState({activePage: pageNumber});
+    }
+
     selectPhoto(e, photo){
     }
     deletePhoto(photo){
@@ -15,7 +29,14 @@ class Photos extends React.Component {
             <React.Fragment>
                 <b>Photos</b> - hello
                 <br/>
-                {photos.map(photo =>(
+                <Pagination
+                    activePage={this.state.activePage}
+                    itemsCountPerPage={10}
+                    totalItemsCount={450}
+                    pageRangeDisplayed={5}
+                    onChange={this.handlePageChange.bind(this)}
+                />
+                {photos.slice((this.state.activePage-1)*10, (this.state.activePage)*10).map(photo =>(
                         <React.Fragment key={photo.id}>
                             <b>{photo.name}</b><br/>
                             {(() => {
@@ -27,6 +48,7 @@ class Photos extends React.Component {
                                 }
                             })()}
                             <br/>
+
                         </React.Fragment>
 
                     )
