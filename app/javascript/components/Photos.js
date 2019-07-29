@@ -4,17 +4,13 @@ import { connect } from 'react-redux'
 
 class Photos extends React.Component {
     selectPhoto(e, photo){
-        console.log(e.dispatch)
     }
     deletePhoto(photo){
-        oonsole.log("deleT")
         this.props.remove(photo)
 
     }
     render() {
         let {photos} = this.props
-        console.log("Photos")
-        console.log(photos)
         return (
             <React.Fragment>
                 <b>Photos</b> - hello
@@ -25,7 +21,7 @@ class Photos extends React.Component {
                             {(() => {
                                 switch(photo.class) {
                                     case 'Photo':
-                                        return <img onClick={e => { this.deletePhoto(photo) }} src={photo.url}/>
+                                        return (<div><a href={photo.around_url}>{photo.location_name}</a> <br/> <img onClick={e => { this.deletePhoto(photo) }} src={photo.url}/></div>)
                                     case 'Video':
                                         return <embed src={photo.url}/>
                                 }

@@ -1,8 +1,8 @@
 import React from 'react'
 import Button from './Button'
-import {uploadVideo} from './VideoActions'
+import {uploadVideo} from './UploadVideoActions'
 
-class UploadVideo extends React.Component {
+class Video extends React.Component {
     constructor(props){
         super(props)
         this.state = { status: (<React.Fragment>&nbsp;</React.Fragment>) }
@@ -13,7 +13,6 @@ class UploadVideo extends React.Component {
         uploadVideo(file, e.target.form['authenticity_token'].value)
     }
     render(){
-        console.log("render!")
         const token = $('meta[name="csrf-token"]').attr('content')
 
         return (
@@ -30,4 +29,4 @@ class UploadVideo extends React.Component {
     }
 }
 
-export default UploadVideo
+export default Video

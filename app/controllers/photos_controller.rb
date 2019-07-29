@@ -1,6 +1,6 @@
 class PhotosController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:create]
-
+  MAX_FEED = 100
 
   def index
     if params[:around].present?
@@ -10,14 +10,22 @@ class PhotosController < ApplicationController
       @photos = Photo.all
     end
 
-    photos = current_user.photos.limit(10) rescue Photo.where(user: nil)
-    videos = current_user.videos.limit(10) rescue Video.where(user: nil)
+    photos = current_user.photos.limit(MAX_FEED) rescue Photo.where(user: nil)
+    videos = current_user.videos.limit(MAX_FEED) rescue Video.where(user: nil)
 
-    @feed = [photos, videos].flatten(1).sort_by{|a| a.created_at}.reverse()[0..5]
+    @feed = [photos, videos].flatten(1).sort_by{|a| a.created_at}.reverse()[0..MAX_FEED]
 
     respond_to do |f|
       f.html
-      f.json { render json: @feed.map{|p| {url: p.class == Photo ? p.image[:medium].url : p.video.url, class: p.class.name, name: p.name, id: p.id}} }
+      f.json { render json: @feed.map{|p| {
+          url: p.class == Photo ? p.image[:medium].url : p.video.url,
+          class: p.class.name,
+          name: p.name,
+          id: p.id,
+          around_url: p.locations[0].present? ? photos_url(around: "#{p.locations[0].lat},#{p.locations[0].lng}") : "",
+          location_name: (p.locations[0].address rescue "Untitled")
+      }}}
+
     end
   end
 
