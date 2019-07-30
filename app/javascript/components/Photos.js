@@ -21,21 +21,27 @@ class Photos extends React.Component {
     }
     deletePhoto(photo){
         this.props.remove(photo)
-
     }
+
+    pagination(){
+        const photos = this.props.photos
+                return (<Pagination
+                    activePage={this.state.activePage}
+                    itemsCountPerPage={10}
+                    totalItemsCount={photos.length}
+                    pageRangeDisplayed={5}
+                    onChange={this.handlePageChange.bind(this)}
+                />)
+    }
+
     render() {
         let {photos} = this.props
         return (
             <React.Fragment>
                 <b>Photos</b> - hello
                 <br/>
-                <Pagination
-                    activePage={this.state.activePage}
-                    itemsCountPerPage={10}
-                    totalItemsCount={450}
-                    pageRangeDisplayed={5}
-                    onChange={this.handlePageChange.bind(this)}
-                />
+                {this.pagination()}
+
                 {photos.slice((this.state.activePage-1)*10, (this.state.activePage)*10).map(photo =>(
                         <React.Fragment key={photo.id}>
                             <b>{photo.name}</b><br/>
@@ -53,6 +59,7 @@ class Photos extends React.Component {
 
                     )
                 )}
+                {this.pagination()}
                 <b>EOL</b>
             </React.Fragment>
         )

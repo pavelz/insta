@@ -1,7 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
 import {fetchPhotos} from "./PhotoActions"
-import PhotoReducer from "./PhotoReducer"
 
 import {connect} from  'react-redux'
 import Photos from "./Photos"
@@ -43,7 +42,6 @@ class MainApp extends React.Component {
                             </Col>
                         </Row>
                     </Grid>
-
                     <Route exact path="/" component={Home}/>
                     <Route path="/about" component={About}/>
                     <Route path="/new" component={Photos}/>

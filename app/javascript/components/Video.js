@@ -17,6 +17,7 @@ class Video extends React.Component {
 
         return (
             <React.Fragment>
+                <div className="mt-1">
                 <form action="/videos" method="post">
                     <input type="hidden" name="authenticity_token" value={token} readOnly={true} />
                     <Button name="Upload!" type="file" title="Choose your file ..." change={this.triggerUpload.bind(this)}>
@@ -24,6 +25,7 @@ class Video extends React.Component {
                     </Button>
                     {this.state.status}
                 </form>
+                </div>
             </React.Fragment>
         )
     }
