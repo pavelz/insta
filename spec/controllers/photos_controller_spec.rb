@@ -14,7 +14,7 @@ RSpec.describe PhotosController, type: :controller do
   end
 
   it 'should allow photo uploads' do
-    expect{
+    expect {
       user = User.create(email: "hello@hello.com", password:"asassasadddasd")
       sign_in(user)
       photo = Hash.new

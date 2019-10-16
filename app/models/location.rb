@@ -1,4 +1,4 @@
 class Location < ApplicationRecord
-  belongs_to :photo
-  belongs_to :video # wrong
+  belongs_to :photo, optional: true
+  belongs_to :video, optional: true
 end

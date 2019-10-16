@@ -8,5 +8,6 @@ Rails.application.routes.draw do
   get '/upload' => 'photos#index'
   resources :photos
   resources :videos
+  get '/alive' => 'utility#alive'
   root to: 'photos#index'
 end

@@ -2,7 +2,7 @@ import fetch from "cross-fetch"
 
 export const FETCH_PHOTOS = 'FETCH_PHOTOS'
 export const RECEIVE_PHOTOS = 'RECEIVE_PHOTOS'
-export const REQEUST_PHOTOS = 'REQEUST_PHOTOS'
+export const REQUEST_PHOTOS = 'REQEUST_PHOTOS'
 export const ADD_PHOTO = 'ADD_PHOTO'
 export const DELETE_PHOTO = 'DELETE_PHOTO'
 

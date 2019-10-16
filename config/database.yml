@@ -80,6 +80,4 @@ test:
 #
 production:
   <<: *default
-  database: insta_production
-  username: insta
-  password: <%= ENV['INSTA_DATABASE_PASSWORD'] %>
+  database: insta_development

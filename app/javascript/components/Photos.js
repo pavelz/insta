@@ -38,7 +38,7 @@ class Photos extends React.Component {
         let {photos} = this.props
         return (
             <React.Fragment>
-                <b>Photos</b> - hello
+                <b>Photos</b> - hello {this.state.activePage}
                 <br/>
                 {this.pagination()}
 

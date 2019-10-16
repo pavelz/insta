@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_29_160216) do
+ActiveRecord::Schema.define(version: 2019_10_16_084016) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,10 +18,10 @@ ActiveRecord::Schema.define(version: 2019_07_29_160216) do
   create_table "locations", force: :cascade do |t|
     t.decimal "lat", precision: 10, scale: 6
     t.decimal "lng", precision: 10, scale: 6
+    t.integer "photo_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "address"
-    t.integer "photo_id"
     t.integer "video_id"
   end
 
@@ -41,12 +41,10 @@ ActiveRecord::Schema.define(version: 2019_07_29_160216) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.string "media_bits_type"
-    t.bigint "media_bits_id"
     t.string "authentication_token", limit: 30
+    t.string "access_token"
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["media_bits_type", "media_bits_id"], name: "index_users_on_media_bits_type_and_media_bits_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 

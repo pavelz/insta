@@ -1,5 +1,8 @@
 class PhotosController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:create]
+
+  acts_as_token_authentication_handler_for User, except: [:index, :create]
+  #skip_before_action :authenticate_user!, only: [:create]
   MAX_FEED = 100
 
   def index
@@ -10,8 +13,9 @@ class PhotosController < ApplicationController
       @photos = Photo.all
     end
 
-    photos = current_user.photos.limit(MAX_FEED) rescue Photo.where(user: nil)
-    videos = current_user.videos.limit(MAX_FEED) rescue Video.where(user: nil)
+    photos = current_user.photos rescue Photo.where(user: nil).order("created_at desc")
+    videos = current_user.videos rescue Video.where(user: nil).order("created_at desc")
+
 
     @feed = [photos, videos].flatten(1).sort_by{|a| a.created_at}.reverse()[0..MAX_FEED]
 
@@ -44,6 +48,7 @@ class PhotosController < ApplicationController
     @location.save!
 
     @photo.location_id = @location.id
+
     @photo.save!
 
     HardWorker.perform_async(@location.id)

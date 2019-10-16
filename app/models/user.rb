@@ -1,4 +1,4 @@
-class User < ApplicationRecord
+class User < ActiveRecord::Base
   acts_as_token_authenticatable
 
   # Include default devise modules. Others available are:
