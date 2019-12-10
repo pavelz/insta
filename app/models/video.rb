@@ -3,7 +3,7 @@ require "image_processing/mini_magick"
 class VideoUploader < Shrine
   plugin :determine_mime_type
   plugin :pretty_location
-  plugin :delete_promoted
+  #plugin :delete_promoted
   plugin :validation_helpers
 
   Attacher.validate do

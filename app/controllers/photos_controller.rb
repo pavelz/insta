@@ -18,11 +18,11 @@ class PhotosController < ApplicationController
 
 
     @feed = [photos, videos].flatten(1).sort_by{|a| a.created_at}.reverse()[0..MAX_FEED]
-
+    #binding.pry
     respond_to do |f|
       f.html
       f.json { render json: @feed.map{|p| {
-          url: p.class == Photo ? p.image[:medium].url : p.video.url,
+          url: p.class == Photo ? p.image(:medium).url : p.video.url,
           class: p.class.name,
           name: p.name,
           id: p.id,
@@ -41,6 +41,7 @@ class PhotosController < ApplicationController
   def create
     @photo = Photo.new(photo_params)
     @photo.user = current_user if current_user.present?
+    @photo.image_derivatives!
     @photo.save!
 
     @location = Location.new(location_params)

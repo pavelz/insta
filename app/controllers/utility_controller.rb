@@ -3,5 +3,4 @@ class UtilityController < ApplicationController
     Rails.logger.warn("OK JASON RAILS 😂")
     render plain: "OK RAILS ✌️"
   end
-
 end

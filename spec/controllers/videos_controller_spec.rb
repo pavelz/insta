@@ -14,7 +14,7 @@ RSpec.describe VideosController, type: :controller do
       video['video'] = @non_video_file
 
       post :create, params: {video: video}
-      response.should have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:unprocessable_entity)
   end
 
   it "loads mp4 files" do
@@ -24,7 +24,7 @@ RSpec.describe VideosController, type: :controller do
       video['video'] = @file
 
       post :create, params: {video: video}
-      response.should be_success
+      expect(response).to be_successful
     }.to change(Video, :count).by(1)
   end
 end

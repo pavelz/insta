@@ -26,7 +26,8 @@ RSpec.describe PhotosController, type: :controller do
       location['lng'] = '22.222'
 
       post :create, params: {photo: photo, location: location}
-      response.should be_success
+      expect(response).to be_successful
+      expect(Photo.last.image_derivatives).not_to be == {} # after shrine 3.1 have to make sure image variants are generated
     }.to change(Photo, :count).by(1)
   end
 end
