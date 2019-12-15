@@ -24,7 +24,10 @@ class PhotosController < ApplicationController
       f.json { render json: @feed.map{|p| {
           url: p.class == Photo ? p.image(:medium).url : p.video.url,
           class: p.class.name,
+          image: Base64.encode64( (p.class == Photo ? p.image(:medium) : p.video).read),
+
           name: p.name,
+          filename: p.name,
           id: p.id,
           around_url: p.locations[0].present? ? photos_url(around: "#{p.locations[0].lat},#{p.locations[0].lng}") : "",
           location_name: (p.locations[0].address rescue "Untitled")

@@ -63,6 +63,7 @@ gem 'image_processing'
 gem 'webpacker'
 gem 'react-rails'
 
+gem 'rack-cors'
 group :development, :test do
   gem 'rails-controller-testing'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
