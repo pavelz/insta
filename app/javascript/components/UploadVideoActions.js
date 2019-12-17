@@ -1,4 +1,5 @@
 import fetch from 'cross-fetch'
+import {store} from "./MainApp"
 export const FETCH_VIDEOS = 'FETCH_VIDEOS';
 export const RECEIVE_VIDEOS = 'RECEIVE_VIDEOS';
 export const REQEUST_VIDEOS = 'REQEUST_VIDEOS';

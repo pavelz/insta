@@ -3,7 +3,6 @@ require "image_processing/mini_magick"
 class VideoUploader < Shrine
   plugin :determine_mime_type
   plugin :pretty_location
-  #plugin :delete_promoted
   plugin :validation_helpers
 
   Attacher.validate do
@@ -13,6 +12,6 @@ end
 
 class Video < ApplicationRecord
   has_many :locations
-  belongs_to :user
+  belongs_to :user, optional: true
   include VideoUploader::Attachment.new(:video)
 end
