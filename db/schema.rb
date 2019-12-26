@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2019_10_16_084016) do
 
   create_table "photos", force: :cascade do |t|
     t.string "name"
-    t.string "user_id"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "image_data"
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 2019_10_16_084016) do
 
   create_table "videos", force: :cascade do |t|
     t.string "name"
-    t.string "user_id"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "video_data"

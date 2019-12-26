@@ -13,8 +13,15 @@ class PhotosController < ApplicationController
       @photos = Photo.all
     end
 
-    photos = current_user.photos rescue Photo.where(user: nil).order("created_at desc")
-    videos = current_user.videos rescue Video.where(user: nil).order("created_at desc")
+    photos = nil
+    videos = nil
+    if current_user != nil
+      photos = Photo.where("user_id = ? or user_id is NULL", current_user.id)
+      videos = Video.where("user_id = ? or user_id is NULL", current_user.id)
+    else
+      photos = Photo.where(user: nil).order("created_at desc")
+      videos = Video.where(user: nil).order("created_at desc")
+    end
 
 
     @feed = [photos, videos].flatten(1).sort_by{|a| a.created_at}.reverse()[0..MAX_FEED]
