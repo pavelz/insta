@@ -10,7 +10,7 @@ gem 'rails', '~> 5.2.3'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
-#gem 'puma', '~> 3.11'
+gem 'puma', '~> 3.11'
 gem 'thin'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -64,7 +64,7 @@ gem 'image_processing'
 # React
 gem 'webpacker'
 gem 'react-rails'
-
+gem 'simplecov', require: false, group: :test
 gem 'rack-cors'
 group :development, :test do
   gem 'rails-controller-testing'
@@ -72,7 +72,14 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry'
   gem 'rubocop'
+
+  gem 'capistrano', '~>3.10', require: false
+  gem 'capistrano-rails', '~> 1.4', require: false
+  gem 'capistrano-rvm'
+  gem 'capistrano3-puma'
+
 end
+
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
