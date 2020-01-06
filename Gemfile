@@ -64,7 +64,7 @@ gem 'image_processing'
 # React
 gem 'webpacker'
 gem 'react-rails'
-
+gem 'simplecov', require: false, group: :test
 gem 'rack-cors'
 group :development, :test do
   gem 'rails-controller-testing'
