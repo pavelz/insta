@@ -16,3 +16,8 @@ test('expect button to match the snapshot' ,() => {
     expect(pret.find(".custom-file").childAt(0).props().type).toEqual("file");
 });
 
+test('expect regular button to be a button', () => {
+    let spy = sinon.spy();
+    let pret = mount(<Button type="button"/>);
+    console.log(pret.find(".btn-primary"));
+});
