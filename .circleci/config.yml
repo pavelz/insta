@@ -13,6 +13,7 @@ jobs:
           PG_USER: ubuntu
           RAILS_ENV: test
           RACK_ENV: test
+          RAILS_MASTER_KEY: 888f0d8e873acaa9097b0e634e6debbf
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
