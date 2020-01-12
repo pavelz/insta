@@ -132,6 +132,9 @@ GEM
     haml (5.1.2)
       temple (>= 0.8.0)
       tilt
+    httplog (1.3.3)
+      rack (>= 1.0)
+      rainbow (>= 2.0.0)
     i18n (1.7.0)
       concurrent-ruby (~> 1.0)
     image_processing (1.9.3)
@@ -369,6 +372,7 @@ DEPENDENCIES
   fastimage
   font-awesome-rails
   haml
+  httplog
   image_processing
   irb
   jbuilder (~> 2.5)
