@@ -13,7 +13,6 @@ class Photos extends React.Component {
         }
     }
     handlePageChange(pageNumber) {
-        console.log(`active page is ${pageNumber}`);
         this.setState({activePage: pageNumber});
     }
 
@@ -35,7 +34,7 @@ class Photos extends React.Component {
     }
 
     render() {
-        let {photos} = this.props
+        let {photos} = this.props;
         return (
             <React.Fragment>
                 <b>Photos</b> - hello {this.state.activePage}
