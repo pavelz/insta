@@ -40,6 +40,7 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   # Print deprecation notices to the Rails logger.
+  #
   config.active_support.deprecation = :log
 
   # Raise an error on page load if there are pending migrations.
@@ -52,6 +53,10 @@ Rails.application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+
+  logger           = ActiveSupport::Logger.new(STDOUT)
+  logger.formatter = config.log_formatter
+  config.logger = ActiveSupport::TaggedLogging.new(logger)
 
   # Suppress logger output for asset requests.
   config.assets.quiet = true

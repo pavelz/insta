@@ -37,7 +37,9 @@ export const deleteLocalPhoto = (photo) =>{
 
 export const deletePhoto = (photo) => {
   return dispatch => {
-    fetch("/photos/" + photo.id, {method: "DELETE"})
+    let token  = $('meta[name="csrf-token"]').prop('content');
+    console.log("%c"+token, "color: red");
+    fetch("/photos/" + photo.id , {method: "DELETE", headers: {'X-CSRF-Token': token}})
         .then(response => response)
         .then(json => dispatch(deleteLocalPhoto(photo)))
   }

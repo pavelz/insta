@@ -31,7 +31,7 @@ class PhotosController < ApplicationController
       f.json { render json: @feed.map{|p| {
           url: p.class == Photo ? p.image(:medium).url : p.video.url,
           class: p.class.name,
-          image: Base64.encode64( (p.class == Photo ? p.image(:medium) : p.video).read),
+          image: Base64.encode64( (p.class == Photo ? p.image(:medium) : p.video).read).gsub("\n",''),
 
           name: p.name,
           filename: p.name,
@@ -45,6 +45,7 @@ class PhotosController < ApplicationController
 
   def destroy
     @photo = Photo.find(params[:id])
+    @photo.destroy
     render json: { ok: 'destroy' }
   end
 
