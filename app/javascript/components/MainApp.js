@@ -8,7 +8,7 @@ import Video from "./Video"
 import About from "./About"
 import {BrowserRouter as Router, Route, Link} from "react-router-dom"
 
-import { Grid, Row, Col } from 'react-flexbox-grid';
+import { Grid, Row  } from 'react-flexbox-grid';
 
 
 class MainApp extends React.Component {
@@ -25,21 +25,12 @@ class MainApp extends React.Component {
         return(
             <React.Fragment>
                 <Router>
-                    <h1>MainApp Component</h1>
                     <Grid fluid>
-                        <Row className="center-xs">
-                            <Col xs={1} md={1}>
-                                <Link className="btn btn-secondary" to="/">Home</Link>
-                            </Col>
-                            <Col xs={1} md={1}>
-                                <Link className="btn btn-secondary" to="/about">About</Link>
-                            </Col>
-                            <Col xs={1} md={1}>
-                                <Link className="btn btn-secondary" to="/new">Post</Link>
-                            </Col>
-                            <Col xs={1} md={1}>
-                                <Link className="btn btn-secondary" to="/upload">Upload</Link>
-                            </Col>
+                        <Row className="center-xs" style={{'justify-content': "center", "text-align": 'center'}}>
+                                <Link className="btn btn-secondary margin-left-10" to="/">Home</Link>
+                                <Link className="btn btn-secondary margin-left-10" to="/about">About</Link>
+                                <Link className="btn btn-secondary margin-left-10" to="/new">Post</Link>
+                                <Link className="btn btn-secondary margin-left-10" to="/upload">Upload</Link>
                         </Row>
                     </Grid>
                     <Route exact path="/" component={Home}/>
@@ -60,7 +51,6 @@ class MainApp extends React.Component {
 function Home (props) {
   return(
     <React.Fragment>
-      <h2> functional home </h2>
     </React.Fragment>
   );
 }

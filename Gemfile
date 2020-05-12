@@ -60,6 +60,8 @@ gem 'haml'
 gem 'rspec-rails'
 gem 'shrine' # attchmetns
 gem 'image_processing'
+# Fonts
+gem 'font-awesome-sass'
 
 # React
 gem 'webpacker'
