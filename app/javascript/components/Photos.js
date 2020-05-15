@@ -43,7 +43,7 @@ class Photos extends React.Component {
 
                 {photos.slice((this.state.activePage-1)*10, (this.state.activePage)*10).map(photo =>(
                         <React.Fragment key={photo.id}>
-                            <b>{photo.name}</b><br/>
+                            {/*<b>{photo.name}</b><br/>*/}
                             {(() => {
                                 switch(photo.class) {
                                     case 'Photo':
