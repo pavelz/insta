@@ -43,13 +43,13 @@ class Photos extends React.Component {
 
                 {photos.slice((this.state.activePage-1)*10, (this.state.activePage)*10).map(photo =>(
                         <React.Fragment key={photo.id}>
-                            <b>{photo.name}</b><br/>
+                            {/*<b>{photo.name}</b><br/>*/}
                             {(() => {
                                 switch(photo.class) {
                                     case 'Photo':
                                         return (<div><a href={photo.around_url}>{photo.location_name}</a> <br/> <img onClick={e => { this.deletePhoto(photo) }} src={photo.url}/></div>)
                                     case 'Video':
-                                        return <embed src={photo.url}/>
+                                        return <video controls><source src={photo.url} type="video/mp4"/></video>
                                 }
                             })()}
                             <br/>

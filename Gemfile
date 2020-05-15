@@ -39,6 +39,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'sidekiq'
 gem 'faraday' #https get
 
+gem 'chartkick'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
@@ -59,6 +61,7 @@ gem 'haml'
 
 gem 'rspec-rails'
 gem 'shrine' # attchmetns
+gem "streamio-ffmpeg"
 gem 'image_processing'
 # Fonts
 gem 'font-awesome-sass'
@@ -107,6 +110,7 @@ group :test do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+#gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
 
 gem 'irb', require: false

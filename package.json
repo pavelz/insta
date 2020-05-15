@@ -3,6 +3,7 @@
   "private": true,
   "dependencies": {
     "@babel/preset-react": "^7.0.0",
+    "@fortawesome/fontawesome-free": "^5.13.0",
     "@material-ui/styles": "^4.2.1",
     "@rails/webpacker": "^4.0.7",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
@@ -30,7 +31,7 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "stimulus": "^1.1.1",
-    "@fortawesome/fontawesome-free": "^5.13.0"
+    "yarn": "^1.22.4"
   },
   "devDependencies": {
     "babel-jest": "^24.8.0",
