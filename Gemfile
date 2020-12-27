@@ -86,6 +86,8 @@ group :development, :test do
   gem 'capistrano-rails', '~> 1.4', require: false
   gem 'capistrano-rvm'
   gem 'capistrano3-puma'
+  gem 'capistrano-bundler', '~> 2.0'
+
   gem 'rspec_junit_formatter' # for CircleCI
   gem 'solargraph', '=0.38'
 end
