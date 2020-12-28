@@ -1,8 +1,10 @@
 class PhotosController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:create]
 
-  acts_as_token_authentication_handler_for User, except: [:index]
-  #skip_before_action :authenticate_user!, only: [:create]
+  acts_as_token_authentication_handler_for User, except: [:index], if: lambda { |controller| controller.request.format.json? }
+  before_action :authenticate_user!, if: lambda { |controller| controller.request.format.html? }
+  skip_before_action :authenticate_user!, only: [:create, :index]
+
   MAX_FEED = 100
 
   def index
