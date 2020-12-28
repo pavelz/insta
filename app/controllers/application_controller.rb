@@ -9,6 +9,15 @@ class ApplicationController < ActionController::Base
 
   private
 
+  alias_method :orig_current_user, :current_user
+  def current_user
+    email = request.headers["HTTP_X_USER_EMAIL"]
+    token = request.headers["HTTP_X_USER_TOKEN"]
+    user = User.find_by(email: email,authentication_token: token)
+    return orig_current_user if user.blank?
+    user
+  end
+
   def json_request
     request.format.json?
   end
