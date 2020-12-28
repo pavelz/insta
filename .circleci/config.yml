@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/ruby:2.6.5-node-browsers
+      - image: circleci/ruby:2.6.5-buster-node-browsers
         environment:
           PG_HOST: localhost
           PG_USER: ubuntu
@@ -37,10 +37,12 @@ jobs:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
-
       - run:
           name: install dependencies
           command: |
+            echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
+            source $BASH_ENV
+            gem install bundler
             bundle install --jobs=4 --retry=3 --path vendor/bundle
 
       - save_cache:
@@ -48,7 +50,9 @@ jobs:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
-      - run: sudo apt install -y postgresql-client || true
+      - run: sudo apt-get update
+      - run: sudo apt install -y postgresql-client 
+      - run: sudo apt install -y ffmpeg
 
       - restore_cache:
           keys:
