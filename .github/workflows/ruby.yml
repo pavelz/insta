@@ -1,0 +1,85 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+# This workflow will download a prebuilt Ruby version, install dependencies and run tests with Rake
+# For more information see: https://github.com/marketplace/actions/setup-ruby-jruby-and-truffleruby
+
+name: Ruby
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  test:
+
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Update APT
+      run: sudo apt-get update
+    - name: Setup Postgresql libs
+      run: sudo apt-get -yqq install libpq-dev
+    - name: install redis
+      run: sudo apt-get install redis -y
+
+
+    - name: Install ffmpeg
+      run: sudo apt-get install -y ffmpeg
+    - name: Set up Ruby
+    # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
+    # change this to (see https://github.com/ruby/setup-ruby#versioning):
+    # uses: ruby/setup-ruby@v1
+      uses: ruby/setup-ruby@21351ecc0a7c196081abca5dc55b08f085efe09a
+      with:
+        ruby-version: 2.6.5
+
+    - name: Install dependencies
+      run: bundle install
+
+    - name: setup database
+      env:
+        DATABASE_URL: "postgres://postgres:postgres@localhost:5432/insta_testing"
+        PG_HOST: localhost
+        PG_USER: postgres
+        PG_PASSWORD: postgres
+
+        RAILS_MASTER_KEY: 888f0d8e873acaa9097b0e634e6debbf
+      run: bundle exec rails db:setup
+    - name: upgrade npm
+
+      run: |
+        sudo apt-get install nodejs-dev node-gyp libssl1.0-dev
+        sudo apt-get install npm
+    - name: npm install
+      run: npm install
+    - name: Webpack Compile
+      run: bundle exec rake webpacker:compile
+
+    - name: Run tests
+      env:
+        DATABASE_URL: "postgres://postgres:postgres@localhost:5432/insta_testing"
+        PG_HOST: localhost
+        PG_USER: postgres
+        PG_PASSWORD: postgres
+        RAILS_MASTER_KEY: 888f0d8e873acaa9097b0e634e6debbf
+      run: bundle exec rake

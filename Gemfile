@@ -69,7 +69,7 @@ gem 'image_processing'
 gem 'font-awesome-sass'
 
 # React
-gem 'webpacker'
+gem 'webpacker', "~>5.2"
 gem 'react-rails'
 gem 'simplecov', require: false, group: :test
 gem 'rack-cors'
