@@ -17,6 +17,7 @@
 default: &default
   adapter: postgresql
   encoding: unicode
+  password: <%= ENV["PG_PASSWORD"] %>
   host: <%= ENV["PG_HOST" ]%>
   user: <%= ENV["PG_USER" ]%>
   # For details on connection pooling, see Rails configuration guide
@@ -51,7 +52,7 @@ development:
   # Minimum log levels, in increasing order:
   #   debug5, debug4, debug3, debug2, debug1,
   #   log, notice, warning, error, fatal, and panic
-  # Defaults to warning.
+  
   #min_messages: notice
 
 # Warning: The database defined as "test" will be erased and
