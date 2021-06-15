@@ -6,7 +6,7 @@ class PhotosController < ApplicationController
   skip_before_action :authenticate_user!, only: [:create, :index]
 
   MAX_FEED = 100
-
+  
   def index
     puts request.headers.env.reject { |key| key.to_s.include?('.') }
 
@@ -16,9 +16,10 @@ class PhotosController < ApplicationController
     else
       @photos = Photo.all
     end
-
+    
     photos = nil
     videos = nil
+    
     if current_user != nil
       photos = Photo.where("user_id = ? or user_id is NULL", current_user.id)
       videos = Video.where("user_id = ? or user_id is NULL", current_user.id)
@@ -26,7 +27,6 @@ class PhotosController < ApplicationController
       photos = Photo.where(user: nil).order("created_at desc")
       videos = Video.where(user: nil).order("created_at desc")
     end
-
 
     @feed = [photos, videos].flatten(2).sort_by{|a| a.created_at}.reverse()[0..MAX_FEED]
     respond_to do |f|

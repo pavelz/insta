@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   private
 
   alias_method :orig_current_user, :current_user
+
   def current_user
     email = request.headers["HTTP_X_USER_EMAIL"]
     token = request.headers["HTTP_X_USER_TOKEN"]
@@ -21,5 +22,4 @@ class ApplicationController < ActionController::Base
   def json_request
     request.format.json?
   end
-
 end

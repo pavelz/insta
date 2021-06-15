@@ -1,45 +1,45 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Insta</title>
-  <meta name="keywords" content="taylor swift football find friends app java kotlin swift ios android epic github jobs"/>
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'%>
-  <%= stylesheet_pack_tag 'myapp', 'data-turbolinks-track': 'reload'%>
-</head>
+  <head>
+    <title>Insta</title>
+    <meta name="keywords" content="taylor swift football find friends app java kotlin swift ios android epic github jobs"/>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'%>
+    <%= stylesheet_pack_tag 'myapp', 'data-turbolinks-track': 'reload'%>
+  </head>
 
-<body>
+  <body>
 
-<div class="container">
-  <div style="float: right">
-    <div class="fa fa-user">
-      <%= current_user.try(:email) || "Anonymous" %>
+    <div class="container">
+      <div style="float: right">
+        <div class="fa fa-user">
+          <%= current_user.try(:email) || "Anonymous" %>
+        </div>
+        <% if current_user %>
+          <%= link_to "Log Out", destroy_user_session_path, method: 'delete' %>
+        <% else %>
+          <%= link_to "Log In", new_user_session_path %>
+        <% end %>
+        <div style="height: 50px"></div>
+      </div>
+      <%= yield %>
     </div>
-    <% if current_user %>
-      <%= link_to "Log Out", destroy_user_session_path, method: 'delete' %>
-    <% else %>
-      <%= link_to "Log In", new_user_session_path %>
-    <% end %>
-    <div style="height: 50px"></div>
-  </div>
-  <%= yield %>
-</div>
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://ga.arslogi.ca/gtag/js?id=UA-155106005-1"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://ga.arslogi.ca/gtag/js?id=UA-155106005-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
 
-    function gtag() {
+      function gtag() {
         dataLayer.push(arguments);
-    }
+      }
 
-    gtag('js', new Date());
-    gtag('config', 'UA-155106005-1');
-</script>
-</body>
+      gtag('js', new Date());
+      gtag('config', 'UA-155106005-1');
+    </script>
+  </body>
 
 </html>

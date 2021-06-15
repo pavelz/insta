@@ -63,7 +63,7 @@ gem 'haml'
 
 gem 'rspec-rails'
 gem 'shrine' # attchmetns
-gem "streamio-ffmpeg"
+gem "streamio-ffmpeg", "~>3.0.0"
 gem 'image_processing'
 # Fonts
 gem 'font-awesome-sass'
@@ -78,7 +78,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry'
-  gem 'rubocop', "=0.77.0"
+  gem 'rubocop'#, "=0.77.0"
 
   gem 'httplog'
 
@@ -89,7 +89,7 @@ group :development, :test do
   gem 'capistrano-bundler', '~> 2.0'
 
   gem 'rspec_junit_formatter' # for CircleCI
-  gem 'solargraph', '=0.38'
+  gem 'solargraph', '=0.40.4'
 end
 
 

@@ -32,6 +32,8 @@ default: &default
     - .ttf
     - .woff
     - .woff2
+    - .tsx
+    - .ts
 
   extensions:
     - .jsx

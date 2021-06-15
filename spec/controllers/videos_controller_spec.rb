@@ -18,7 +18,7 @@ RSpec.describe VideosController, type: :controller do
   end
 
   it "loads mp4 files" do
-    expect{
+    expect {
       video = Hash.new
       video['name'] = 'video.mp4'
       video['video'] = @file
@@ -27,4 +27,5 @@ RSpec.describe VideosController, type: :controller do
       expect(response).to be_successful
     }.to change(Video, :count).by(1)
   end
+
 end
