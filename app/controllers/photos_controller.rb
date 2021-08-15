@@ -1,48 +1,61 @@
+# frozen_string_literal: true
+
 class PhotosController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:create]
 
-  acts_as_token_authentication_handler_for User, except:[:index], if: lambda { |controller| controller.request.format.json? }
-  before_action :authenticate_user!, unless: lambda { |controller| controller.request.format.json? }
-  skip_before_action :authenticate_user!, only: [:create, :index]
+  acts_as_token_authentication_handler_for User, except: [:index], if: lambda { |controller|
+                                                                         controller.request.format.json?
+                                                                       }
+  before_action :authenticate_user!, unless: ->(controller) { controller.request.format.json? }
+  skip_before_action :authenticate_user!, only: %i[create index]
 
   MAX_FEED = 100
-  
+
   def index
     puts request.headers.env.reject { |key| key.to_s.include?('.') }
 
     if params[:around].present?
       (lat, lng) = params[:around].match(/([\d.]+),([\d.]+)/).captures
-      @photos = Photo.joins(:locations).where("trunc(locations.lat,4) = trunc(?,4) and trunc(locations.lng,4) = trunc(?,4)",lat.to_f, lng.to_f)
+      @photos = Photo.joins(:locations).where(
+        'trunc(locations.lat,4) = trunc(?,4) and trunc(locations.lng,4) = trunc(?,4)', lat.to_f, lng.to_f
+      )
     else
       @photos = Photo.all
     end
-    
+
     photos = nil
     videos = nil
-    
-    if current_user != nil
-      photos = Photo.where("user_id = ? or user_id is NULL", current_user.id)
-      videos = Video.where("user_id = ? or user_id is NULL", current_user.id)
+
+    if !current_user.nil?
+      photos = Photo.where('user_id = ? or user_id is NULL', current_user.id)
+      videos = Video.where('user_id = ? or user_id is NULL', current_user.id)
     else
-      photos = Photo.where(user: nil).order("created_at desc")
-      videos = Video.where(user: nil).order("created_at desc")
+      photos = Photo.where(user: nil).order('created_at desc')
+      videos = Video.where(user: nil).order('created_at desc')
     end
 
-    @feed = [photos, videos].flatten(2).sort_by{|a| a.created_at}.reverse()[0..MAX_FEED]
+    @feed = [photos, videos].flatten(2).sort_by(&:created_at).reverse[0..MAX_FEED]
     respond_to do |f|
       f.html
-      f.json { render json: @feed.map{|p| {
-        url: p.is_a?(Photo) ? p.image(:medium).url : p.video.url,
-        class: p.class.name,
-        #image: Base64.encode64( (p.class == Photo ? p.image(:medium) : p.video).read).gsub("\n",''),
-        screenshot: p.is_a?(Video) ? p.video(:screenshot).url : "",
-        name: p.name,
-        filename: p.name,
-        id: p.id,
-        around_url: p.locations[0].present? ? photos_url(around: "#{p.locations[0].lat},#{p.locations[0].lng}") : "",
-        location_name: (p.locations[0].address rescue "Untitled")
-      }}}
-
+      f.json do
+        render json: @feed.map { |p|
+                       {
+                         url: p.is_a?(Photo) ? p.image(:medium).url : p.video.url,
+                         class: p.class.name,
+                         # image: Base64.encode64( (p.class == Photo ? p.image(:medium) : p.video).read).gsub("\n",''),
+                         screenshot: p.is_a?(Video) ? p.video(:screenshot).url : '',
+                         name: p.name,
+                         filename: p.name,
+                         id: p.id,
+                         around_url: p.locations[0].present? ? photos_url(around: "#{p.locations[0].lat},#{p.locations[0].lng}") : '',
+                         location_name: begin
+                           p.locations[0].address
+                         rescue StandardError
+                           'Untitled'
+                         end
+                       }
+                     }
+      end
     end
   end
 
@@ -69,11 +82,12 @@ class PhotosController < ApplicationController
 
     respond_to do |r|
       r.html
-      r.json{ render json: {ok: true}}
+      r.json { render json: { ok: true } }
     end
   end
 
   private
+
   def location_params
     params.require(:location).permit!
   end

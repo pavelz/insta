@@ -89,7 +89,7 @@ group :development, :test do
   gem 'capistrano-bundler', '~> 2.0'
 
   gem 'rspec_junit_formatter' # for CircleCI
-  gem 'solargraph', '=0.40.4'
+  gem 'solargraph'
 end
 
 

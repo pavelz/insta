@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   #devise_for :users, controllers: {
     #sessions: 'users/sessions'
   #}
+  #get '/feed' => 'feed#index'
+ 
+  resources :feed, controller: 'feed'
 
   get '/upload' => 'photos#index'
   resources :photos
