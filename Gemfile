@@ -82,7 +82,7 @@ group :development, :test do
 
   gem 'httplog'
 
-  gem 'capistrano', '~>3.10', require: false
+  gem 'capistrano', '=3.14.1', require: false
   gem 'capistrano-rails', '~> 1.4', require: false
   gem 'capistrano-rvm'
   gem 'capistrano3-puma'
