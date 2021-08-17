@@ -47,7 +47,7 @@ gem 'graphql'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 # bootstrap
-gem 'bootstrap', '~> 4.0.0'
+gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails' # needed for bootstap ... 
 
 # pictures
