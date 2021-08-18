@@ -42,7 +42,7 @@ class PhotosController < ApplicationController
                        {
                          url: p.is_a?(Photo) ? p.image(:medium).url : p.video.url,
                          class: p.class.name,
-                         image: Base64.encode64( (p.class == Photo ? p.image(:medium) : p.video).read).gsub("\n",''),
+                         #image: Base64.encode64( (p.class == Photo ? p.image(:medium) : p.video).read).gsub("\n",''),
                          screenshot: p.is_a?(Video) ? p.video(:screenshot).url : '',
                          name: p.name,
                          filename: p.name,
