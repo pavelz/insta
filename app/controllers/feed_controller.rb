@@ -3,4 +3,3 @@ class FeedController < ApplicationController
     render json: {ok: true}
   end
 end
-

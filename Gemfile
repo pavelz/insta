@@ -3,14 +3,14 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.5'
+ruby '2.7.5'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
-gem 'puma', '~> 3.11'
+gem 'puma', '~> 4'
 gem 'thin'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -89,7 +89,7 @@ group :development, :test do
   gem 'capistrano-bundler', '~> 2.0'
 
   gem 'rspec_junit_formatter' # for CircleCI
-  gem 'solargraph'
+  gem 'solargraph', '=0.48.0'
 end
 
 
@@ -100,6 +100,8 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  #gem "ruby-lsp", require: false
+  gem "ripper-tags"
 end
 
 group :test do
