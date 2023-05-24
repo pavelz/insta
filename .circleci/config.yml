@@ -46,7 +46,7 @@ jobs:
 
       - run: curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
       - run: sudo apt list -a nodejs
-      - run: sudo apt install nodejs npm
+      - run: sudo apt install nodejs
       - run:
           name: install dependencies
           command: |
