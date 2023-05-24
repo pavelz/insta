@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/node:16.12
+      - image: circleci/ruby:2.7.5-buster-node-browsers
         environment:
           PG_HOST: localhost
           PG_USER: ubuntu
@@ -38,7 +38,6 @@ jobs:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
-      - run: sudo apt-get install ruby gem bundler
       - run:
           name: install dependencies
           command: |
