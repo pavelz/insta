@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: cimg/node@16.12
+      - image: circleci/node:16.12
         environment:
           PG_HOST: localhost
           PG_USER: ubuntu
