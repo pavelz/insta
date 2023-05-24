@@ -22,6 +22,7 @@ jobs:
         environment:
           POSTGRES_USER: ubuntu
           POSTGRES_DB: insta_test
+          POSTGRES_HOST_AUTH_METHOD: trust
 
       - image: circleci/redis:5.0.14
 
