@@ -38,6 +38,7 @@ jobs:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
+      - run: wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
       - run: sudo apt remove nodejs npm
       - run: curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
       - run: sudo apt list -a nodejs
@@ -54,7 +55,6 @@ jobs:
           paths:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-      - run: wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
       - run: sudo apt-get --allow-releaseinfo-change update
       - run: sudo apt install -y postgresql-client 
       - run: sudo apt install -y ffmpeg
