@@ -55,6 +55,7 @@ jobs:
       - run: sudo apt install -y postgresql-client 
       - run: sudo apt install -y ffmpeg
       - run: sudo apt install nodejs npm
+      - run: curl -fsSL https://deb.nodesource.com/setup_current.x | bash - && apt-get install -y nodejs
 
       - restore_cache:
           keys:
