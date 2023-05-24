@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/ruby:2.7.5-buster-node-browsers
+      - image: circleci/node@16.12
         environment:
           PG_HOST: localhost
           PG_USER: ubuntu
