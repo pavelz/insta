@@ -50,8 +50,7 @@ jobs:
           paths:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-      - run: sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 6AF7F09730B3F0A4
-      - run: sudo apt-get update
+      - run: sudo apt-get --allow-releaseinfo-change update
       - run: sudo apt install -y postgresql-client 
       - run: sudo apt install -y ffmpeg
 
