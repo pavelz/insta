@@ -38,6 +38,10 @@ jobs:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
+      - run: sudo apt uninstall nodejs npm
+      - run: curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
+      - run: sudo apt list -a nodejs
+      - run: sudo apt install nodejs npm
       - run:
           name: install dependencies
           command: |
@@ -54,9 +58,6 @@ jobs:
       - run: sudo apt-get --allow-releaseinfo-change update
       - run: sudo apt install -y postgresql-client 
       - run: sudo apt install -y ffmpeg
-      - run: curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
-      - run: sudo apt list -a nodejs
-      - run: sudo apt install nodejs npm
       #- run: curl -fsSL https://deb.nodesource.com/setup_current.x | bash - && apt-get install -y nodejs
 
       - restore_cache:
