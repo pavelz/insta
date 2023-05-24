@@ -39,7 +39,7 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
       - run: wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-      - run: sudo apt remove nodejs npm
+      - run: sudo apt remove nodejs npm libnode72
       - run: sudo rm -rf /usr/local/bin/node*
       - run: sudo rm -rf /usr/local/bin/npm*
       - run: sudo rm -rf /etc/apt/sources.list.d/nodesource.list
