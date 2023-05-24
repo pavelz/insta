@@ -50,8 +50,7 @@ jobs:
           paths:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-      - run: sudo apt install ca-certificates
-      - run: sudo gpg --keyserver keyserver.ubuntu.com --recv 4EB27DB2A3B88B8B
+      - run: wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
       - run: sudo apt-get --allow-releaseinfo-change update
       - run: sudo apt install -y postgresql-client 
       - run: sudo apt install -y ffmpeg
