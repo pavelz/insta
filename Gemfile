@@ -39,6 +39,10 @@ gem 'jbuilder', '~> 2.5'
 gem 'sidekiq'
 gem 'faraday' #https get
 
+#type system
+gem 'rbs_rails', require: false
+
+
 gem 'chartkick'
 
 gem 'graphql'
@@ -89,7 +93,7 @@ group :development, :test do
   gem 'capistrano-bundler', '~> 2.0'
 
   gem 'rspec_junit_formatter' # for CircleCI
-  gem 'solargraph', '=0.48.0'
+  gem 'solargraph', '=0.49.0'
 end
 
 
