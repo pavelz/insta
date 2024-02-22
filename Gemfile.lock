@@ -372,9 +372,6 @@ GEM
       thor (~> 1.0)
       tilt (~> 2.0)
       yard (~> 0.9, >= 0.9.24)
-    solargraph-rails (1.1.0)
-      activesupport
-      solargraph
     spring (2.1.1)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -482,7 +479,6 @@ DEPENDENCIES
   simple_token_authentication (~> 1.0)
   simplecov
   solargraph (= 0.49.0)
-  solargraph-rails
   spring
   spring-watcher-listen (~> 2.0.0)
   streamio-ffmpeg (~> 3.0.0)

@@ -42,7 +42,6 @@ gem 'faraday' #https get
 #type system
 gem 'rbs_rails', require: false
 
-
 gem 'chartkick'
 
 gem 'graphql'
@@ -56,8 +55,7 @@ gem 'jquery-rails' # needed for bootstap ...
 
 # pictures
 gem 'font-awesome-rails'
-
-gem  'devise'
+gem 'devise'
 
 gem 'simple_token_authentication', '~> 1.0'
 

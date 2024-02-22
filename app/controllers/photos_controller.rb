@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# what is this
 class PhotosController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:create]
 
@@ -10,7 +13,7 @@ class PhotosController < ApplicationController
   MAX_FEED = 100
 
   def index
-    puts request.headers.env.reject { |key| key.to_s.include?('.') }
+    puts(request.headers.env.reject { |key| key.to_s.include?('.') })
 
     if params[:around].present?
       (lat, lng) = params[:around].match(/([\d.]+),([\d.]+)/).captures
@@ -40,7 +43,7 @@ class PhotosController < ApplicationController
                        {
                          url: p.is_a?(Photo) ? p.image(:medium).url : p.video.url,
                          class: p.class.name,
-                         #**(request.user_agent =~ /CFNetwork/ ? {image: Base64.encode64( (p.class == Photo ? p.image(:medium) : p.video).read).gsub("\n",'')} : {}),
+                         # **(request.user_agent =~ /CFNetwork/ ? {image: Base64.encode64( (p.class == Photo ? p.image(:medium) : p.video).read).gsub("\n",'')} : {}),
                          screenshot: p.is_a?(Video) ? p.video(:screenshot).url : '',
                          name: p.name,
                          filename: p.name,
