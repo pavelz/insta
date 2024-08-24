@@ -56,7 +56,7 @@ GEM
       execjs (~> 2.0)
     backport (1.2.0)
     bcrypt (3.1.18)
-    benchmark (0.2.1)
+    benchmark (0.3.0)
     bindex (0.8.1)
     bootsnap (1.16.0)
       msgpack (~> 1.2)
@@ -154,7 +154,7 @@ GEM
     io-console (0.6.0)
     irb (1.6.3)
       reline (>= 0.3.0)
-    jaro_winkler (1.5.4)
+    jaro_winkler (1.5.6)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
@@ -188,6 +188,9 @@ GEM
     minitest (5.18.0)
     msgpack (1.7.0)
     multi_json (1.15.0)
+    neovim (0.10.0)
+      msgpack (~> 1.1)
+      multi_json (~> 1.0)
     net-imap (0.3.4)
       date
       net-protocol
@@ -356,7 +359,7 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.4)
-    solargraph (0.49.0)
+    solargraph (0.50.0)
       backport (~> 1.2)
       benchmark
       bundler (~> 2.0)
@@ -372,6 +375,9 @@ GEM
       thor (~> 1.0)
       tilt (~> 2.0)
       yard (~> 0.9, >= 0.9.24)
+    solargraph-rails (1.1.0)
+      activesupport
+      solargraph
     spring (2.1.1)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -427,7 +433,7 @@ GEM
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    yard (0.9.34)
+    yard (0.9.36)
 
 PLATFORMS
   -darwin-21
@@ -461,6 +467,7 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   jquery-rails
   listen (>= 3.0.5, < 3.2)
+  neovim
   pg (>= 0.18, < 2.0)
   pry
   puma (~> 4)
@@ -478,7 +485,8 @@ DEPENDENCIES
   sidekiq
   simple_token_authentication (~> 1.0)
   simplecov
-  solargraph (= 0.49.0)
+  solargraph (= 0.50.0)
+  solargraph-rails
   spring
   spring-watcher-listen (~> 2.0.0)
   streamio-ffmpeg (~> 3.0.0)

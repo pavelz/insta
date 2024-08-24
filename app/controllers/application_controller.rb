@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
 
   def current_user
     email = request.headers["HTTP_X_USER_EMAIL"]
+    email = request
     token = request.headers["HTTP_X_USER_TOKEN"]
     user = User.find_by(email: email,authentication_token: token)
     return orig_current_user if user.blank?
