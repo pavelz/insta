@@ -1,0 +1,128 @@
+name: Check Rails Version
+
+# This GitHub Action checks whether the Rails version used in the repository 
+# is the latest version available from RubyGems
+on:
+  workflow_dispatch:
+    # This action can be triggered manually from the GitHub Actions tab
+    # Go to Actions -> Check Rails Version -> Run workflow
+
+jobs:
+  check-rails-version:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.7.5  # Match the Ruby version from Gemfile
+        
+    - name: Install dependencies
+      run: |
+        gem install bundler
+        bundle install --jobs 4 --retry 3
+        
+    - name: Extract current Rails version
+      id: current_version
+      run: |
+        # Try to get Rails version from Gemfile.lock first (most accurate)
+        if [ -f "Gemfile.lock" ]; then
+          CURRENT_VERSION=$(grep -E "^\s*rails \(" Gemfile.lock | grep -oE '[0-9]+\.[0-9]+\.[0-9]+(\.[0-9]+)?' | head -1)
+        fi
+        
+        # Fallback to Gemfile if Gemfile.lock doesn't have clear version
+        if [ -z "$CURRENT_VERSION" ]; then
+          CURRENT_VERSION=$(grep "gem ['\"]rails['\"]" Gemfile | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' | head -1)
+        fi
+        
+        # If still no version, try bundle show
+        if [ -z "$CURRENT_VERSION" ]; then
+          CURRENT_VERSION=$(bundle show rails | grep -oE '[0-9]+\.[0-9]+\.[0-9]+(\.[0-9]+)?' 2>/dev/null || echo "")
+        fi
+        
+        # Final check - ensure we found a version
+        if [ -z "$CURRENT_VERSION" ]; then
+          echo "❌ Could not determine current Rails version"
+          echo "Make sure Rails is specified in Gemfile or Gemfile.lock"
+          exit 1
+        fi
+        
+        echo "current_version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
+        echo "Current Rails version: $CURRENT_VERSION"
+        
+    - name: Get latest Rails version
+      id: latest_version
+      run: |
+        # Query RubyGems API for latest Rails version with error handling
+        LATEST_VERSION=$(curl -s --max-time 30 https://rubygems.org/api/v1/gems/rails.json | jq -r '.version' 2>/dev/null)
+        
+        # Check if we got a valid version
+        if [ -z "$LATEST_VERSION" ] || [ "$LATEST_VERSION" = "null" ]; then
+          echo "❌ Failed to fetch latest Rails version from RubyGems API"
+          echo "This could be due to network issues or API unavailability"
+          exit 1
+        fi
+        
+        echo "latest_version=$LATEST_VERSION" >> $GITHUB_OUTPUT
+        echo "Latest Rails version: $LATEST_VERSION"
+        
+    - name: Compare versions and output results  
+      id: comparison
+      run: |
+        CURRENT="${{ steps.current_version.outputs.current_version }}"
+        LATEST="${{ steps.latest_version.outputs.latest_version }}"
+        
+        echo "=== Rails Version Check Results ==="
+        echo "Current Rails version: $CURRENT"
+        echo "Latest Rails version: $LATEST"
+        echo ""
+        
+        # Simple version comparison (works for semantic versioning)
+        if [ "$CURRENT" = "$LATEST" ]; then
+          echo "✅ Rails version is UP-TO-DATE!"
+          echo "status=up-to-date" >> $GITHUB_OUTPUT
+          echo "up_to_date=true" >> $GITHUB_OUTPUT
+        else
+          echo "⚠️  Rails version is OUTDATED!"
+          echo "Consider upgrading from $CURRENT to $LATEST"
+          echo "status=outdated" >> $GITHUB_OUTPUT  
+          echo "up_to_date=false" >> $GITHUB_OUTPUT
+        fi
+        
+        # Also compare major.minor versions to give more context
+        CURRENT_MAJOR_MINOR=$(echo $CURRENT | cut -d. -f1-2)
+        LATEST_MAJOR_MINOR=$(echo $LATEST | cut -d. -f1-2)
+        
+        if [ "$CURRENT_MAJOR_MINOR" != "$LATEST_MAJOR_MINOR" ]; then
+          echo ""
+          echo "📋 Note: You are on Rails $CURRENT_MAJOR_MINOR.x, while the latest is $LATEST_MAJOR_MINOR.x"
+          echo "This may require a major version upgrade with breaking changes."
+        fi
+        
+    - name: Create step summary
+      run: |
+        echo "## Rails Version Check Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "| Metric | Value |" >> $GITHUB_STEP_SUMMARY  
+        echo "|--------|-------|" >> $GITHUB_STEP_SUMMARY
+        echo "| Current Version | \`${{ steps.current_version.outputs.current_version }}\` |" >> $GITHUB_STEP_SUMMARY
+        echo "| Latest Version | \`${{ steps.latest_version.outputs.latest_version }}\` |" >> $GITHUB_STEP_SUMMARY
+        echo "| Status | ${{ steps.comparison.outputs.status }} |" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        
+        if [ "${{ steps.comparison.outputs.up_to_date }}" = "false" ]; then
+          echo "### 🔄 Upgrade Recommended" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Your Rails version is outdated. Consider upgrading to the latest version:" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
+          echo "bundle update rails" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+        else
+          echo "### ✅ All Good!" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY  
+          echo "Your Rails version is up to date." >> $GITHUB_STEP_SUMMARY
+        fi
